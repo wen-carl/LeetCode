@@ -28,6 +28,8 @@ import java.util.Set;
  * 解释: 因为无重复字符的最长子串是"wke"，所以其长度为 3。
  *     请注意，你的答案必须是 子串 的长度，"pwke"是一个子序列，不是子串。
  *
+ * "ab"
+ *
  * @author : wenguang
  * @date : 2021/3/22 11:03
  */
@@ -36,43 +38,27 @@ public class LongestSubstringWithoutRepeatingCharacters {
     public static void main(String[] args) {
         String in = "pwwkew";
         System.out.println("in: " + in);
-        int out = longestSubstringWithoutRepeatingCharacters1(in);
+        int out = longestSubstringWithoutRepeatingCharacters(in);
         System.out.println("out: " + out);
     }
 
-    public static int longestSubstringWithoutRepeatingCharacters1(String para) {
-        int len = 0;
-        for (int i = 0; i < para.length(); i++) {
-            for (int j = i + 1; j <para.length(); j++) {
-                char charJ = para.charAt(j);
-                boolean shouldBreak = false;
-                for (int k = i; k < j; k++) {
-                    char charK = para.charAt(k);
-                    if (charK == charJ) {
-                        shouldBreak = true;
-                        break;
-                    }
-                }
-                len = Math.max(j - i, len);
-                if (shouldBreak) {
-                    break;
-                }
-            }
+    public static int longestSubstringWithoutRepeatingCharacters(String s) {
+        if (null == s || s.length() == 0) {
+            return 0;
         }
 
-        return len;
-    }
-
-    public static int longestSubstringWithoutRepeatingCharacters2(String para) {
-        int res = 0;
+        int res = 1;
+        int start = 0;
 
         Map<Character, Integer> map = new HashMap<>();
-        for (int i = 0; i < para.length(); i++) {
-            char c = para.charAt(i);
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
             Integer index = map.get(c);
             if (null != index) {
-                res = Math.max(res, i - index);
+                start = Math.max(start, index + 1);
             }
+
+            res = Math.max(res, i - start + 1);
 
             map.put(c, i);
         }
