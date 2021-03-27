@@ -5,6 +5,7 @@ import com.seven.leetcode.utils.Utils;
 import java.util.Arrays;
 
 /**
+ * 83. 删除排序链表中的重复元素
  * RemoveDuplicatesFromSortedArray
  * https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/
  * 级别：Easy
